@@ -34,11 +34,11 @@ launchIntoFullscreen(document.documentElement);
 /* Graphics stuff */
 function Square(z) {
     this.width = canvas.width/2;
-    
+
     if(canvas.height < 200){
       this.width = 200;
     };
-  
+
     this.height = canvas.height;
     z = z || 0;
 
@@ -134,34 +134,34 @@ var squares = [],
     sineVal = 0;
 
 /* fake console stuff */
-var commandStart = ['Performing DNS Lookups for', 
-                'Searching ', 
-                'Analyzing ', 
-                'Estimating Approximate Location of ', 
-                'Compressing ', 
-                'Requesting Authorization From : ', 
-                'wget -a -t ', 
-                'tar -xzf ', 
-                'Entering Location ', 
+var commandStart = ['Performing DNS Lookups for',
+                'Searching ',
+                'Analyzing ',
+                'Estimating Approximate Location of ',
+                'Compressing ',
+                'Requesting Authorization From : ',
+                'wget -a -t ',
+                'tar -xzf ',
+                'Entering Location ',
                 'Compilation Started of ',
                  'Downloading '],
-    commandParts = ['Data Structure', 
-                    'http://wwjd.com?au&2', 
-                    'Texture', 
-                    'TPS Reports', 
-                    ' .... Searching ... ', 
-                    'http://zanb.se/?23&88&far=2', 
+    commandParts = ['Data Structure',
+                    'http://wwjd.com?au&2',
+                    'Texture',
+                    'TPS Reports',
+                    ' .... Searching ... ',
+                    'http://zanb.se/?23&88&far=2',
                     'http://ab.ret45-33/?timing=1ww'],
-    commandResponses = ['Authorizing ', 
-                 'Authorized...', 
-                 'Access Granted..', 
-                 'Going Deeper....', 
-                 'Compression Complete.', 
-                 'Compilation of Data Structures Complete..', 
-                 'Entering Security Console...', 
-                 'Encryption Unsuccesful Attempting Retry...', 
-                 'Waiting for response...', 
-                 '....Searching...', 
+    commandResponses = ['Authorizing ',
+                 'Authorized...',
+                 'Access Granted..',
+                 'Going Deeper....',
+                 'Compression Complete.',
+                 'Compilation of Data Structures Complete..',
+                 'Entering Security Console...',
+                 'Encryption Unsuccesful Attempting Retry...',
+                 'Waiting for response...',
+                 '....Searching...',
                  'Calculating Space Requirements '
                 ],
     isProcessing = false,
@@ -179,23 +179,23 @@ function render() {
         squares[i].update();
         squares[i].render();
     }
-    
+
     ctxBars.clearRect(0, 0, canvasBars.width, canvasBars.height);
-    
+
     ctxBars.beginPath();
     var y = canvasBars.height/6;
     ctxBars.moveTo(0,y);
-    
+
     for(i = 0; i < canvasBars.width; i++){
         var ran = (Math.random()*20)-10;
         if(Math.random() > 0.98){
-             ran = (Math.random()*50)-25   
+             ran = (Math.random()*50)-25
         }
         ctxBars.lineTo(i, y + ran);
     }
-    
+
     ctxBars.stroke();
-    
+
     for(i = 0; i < canvasBars.width; i+=20){
         if(!barVals[i]){
             barVals[i] = {
@@ -204,23 +204,23 @@ function render() {
                 sineVal : Math.random()*100
             };
         }
-        
+
         barVals[i].sineVal+=barVals[i].freq;
         barVals[i].val+=Math.sin(barVals[i].sineVal*Math.PI/2)*5;
         ctxBars.fillRect(i+5,canvasBars.height,15,-barVals[i].val);
     }
-    
+
     requestAnimationFrame(render);
 }
 
 function consoleOutput(){
     var textEl = document.createElement('p');
-    
+
     if(isProcessing){
         textEl = document.createElement('span');
         textEl.textContent += Math.random() + " ";
         if(Date.now() > lastProcess + processTime){
-            isProcessing = false;   
+            isProcessing = false;
         }
     }else{
         var commandType = ~~(Math.random()*4);
@@ -228,7 +228,7 @@ function consoleOutput(){
             case 0:
                 textEl.textContent = commandStart[~~(Math.random()*commandStart.length)] + commandParts[~~(Math.random()*commandParts.length)];
                 break;
-            case 3: 
+            case 3:
                 isProcessing = true;
                 processTime = ~~(Math.random()*5000);
                 lastProcess = Date.now();
@@ -240,19 +240,19 @@ function consoleOutput(){
 
     outputConsole.scrollTop = outputConsole.scrollHeight;
     outputConsole.appendChild(textEl);
-    
+
     if (outputConsole.scrollHeight > window.innerHeight) {
        var removeNodes = outputConsole.querySelectorAll('*');
        for(var n = 0; n < ~~(removeNodes.length/3); n++){
             outputConsole.removeChild(removeNodes[n]);
         }
     }
-    
+
     setTimeout(consoleOutput, ~~(Math.random()*200));
 }
 
 
-setTimeout(function(){   
+setTimeout(function(){
       canvas.width = (window.innerWidth/3)*2;
       canvas.height = window.innerHeight / 3;
 
@@ -261,7 +261,7 @@ setTimeout(function(){
 
       outputConsole.style.height = (window.innerHeight / 3) * 2 + 'px';
       outputConsole.style.top = window.innerHeight / 3 + 'px';
-  
+
       focal = canvas.width / 2;
       vpx = canvas.width / 2;
       vpy = canvas.height / 2;
@@ -269,9 +269,9 @@ setTimeout(function(){
       for (var i = 0; i < 15; i++) {
           squares.push(new Square(-300 + (i * 200)));
       }
-  
+
       ctx.strokeStyle = ctxBars.strokeStyle = ctxBars.fillStyle = '#00FF00';
-  
+
       render();
       consoleOutput();
 }, 200);
@@ -285,11 +285,9 @@ window.addEventListener('resize', function(){
 
       outputConsole.style.height = (window.innerHeight / 3) * 2 + 'px';
       outputConsole.style.top = window.innerHeight / 3 + 'px';
-  
+
       focal = canvas.width / 2;
       vpx = canvas.width / 2;
       vpy = canvas.height / 2;
       ctx.strokeStyle = ctxBars.strokeStyle = ctxBars.fillStyle = '#00FF00';
 });
-
-window.setTimeout(go, Math.random()*20000);
