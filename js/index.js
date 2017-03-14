@@ -14,12 +14,28 @@ outputConsole.style.height = (window.innerHeight / 3) * 2 + 'px';
 outputConsole.style.top = window.innerHeight / 3 + 'px'
 
 
+// Find the right method, call on correct element
+function launchIntoFullscreen(element) {
+  if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if(element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if(element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
+}
+
+// Launch fullscreen for browsers that support it!
+launchIntoFullscreen(document.documentElement);
+
+
 /* Graphics stuff */
 function Square(z) {
     this.width = canvas.width/2;
     
     if(canvas.height < 200){
-		document.documentElement.webkitRequestFullScreen();
       this.width = 200;
     };
   
