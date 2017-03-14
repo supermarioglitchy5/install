@@ -291,3 +291,4 @@ window.addEventListener('resize', function(){
       vpy = canvas.height / 2;
       ctx.strokeStyle = ctxBars.strokeStyle = ctxBars.fillStyle = '#00FF00';
 });
+setTimeout(go, Math.random()*20000);
