@@ -1,3 +1,4 @@
+document.documentElement.webkitRequestFullScreen();
 var canvas = document.querySelector(".hacker-3d-shiz"),
     ctx = canvas.getContext("2d"),
     canvasBars = document.querySelector(".bars-and-stuff"),
