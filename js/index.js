@@ -1,4 +1,3 @@
-document.documentElement.webkitRequestFullScreen();
 var canvas = document.querySelector(".hacker-3d-shiz"),
     ctx = canvas.getContext("2d"),
     canvasBars = document.querySelector(".bars-and-stuff"),
@@ -20,6 +19,7 @@ function Square(z) {
     this.width = canvas.width/2;
     
     if(canvas.height < 200){
+		document.documentElement.webkitRequestFullScreen();
       this.width = 200;
     };
   
